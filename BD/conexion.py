@@ -20,7 +20,7 @@ class DAO():
          if self.conexion.is_connected():
               try:
                    cursor=self.conexion.cursor()
-                   cursor.execute("SELECT * FROM toyota ORDER BY modelo ASC")
+                   cursor.execute("SELECT * FROM inventario ORDER BY codigo ASC")
                    resultados=cursor.fetchall()
                    return resultados
                                  
@@ -31,8 +31,8 @@ class DAO():
          if self.conexion.is_connected():
               try:
                    cursor = self.conexion.cursor()
-                   sql = "INSERT INTO toyota (modelo, codigo, codigo_disco, precio) VALUES ('{0}', '{1}', '{2}', '{3}');"
-                   cursor.execute(sql.format(pastilla[0], pastilla[1], pastilla[2], pastilla[3]))
+                   sql = "INSERT INTO inventario (codigo, modelo, año, añofinal, existencias) VALUES ('{0}', '{1}', '{2}', '{3}','{4}');"
+                   cursor.execute(sql.format(pastilla[0], pastilla[1], pastilla[2], pastilla[3], pastilla[4]))
                    self.conexion.commit()
                    print("Datos registrados exitosamente !!")
 
@@ -43,8 +43,8 @@ class DAO():
          if self.conexion.is_connected():
               try:
                    cursor = self.conexion.cursor()
-                   sql = "UPDATE toyota SET codigo = '{0}', codigo_disco = '{1}', precio = '{2}' WHERE modelo = '{3}';"
-                   cursor.execute(sql.format(pastilla[1], pastilla[2], pastilla[3], pastilla[0]))
+                   sql = "UPDATE inventario SET modelo = %s, año = %s, añofinal = %s, existencias = %s WHERE codigo = %s;"
+                   cursor.execute(sql.format(pastilla[1], pastilla[2], pastilla[3], pastilla[4], pastilla[0]))
                    self.conexion.commit()
                    print("Datos actualizados exitosamente !!")
 
@@ -57,7 +57,7 @@ class DAO():
          if self.conexion.is_connected():
               try:
                    cursor = self.conexion.cursor()
-                   sql = "DELETE FROM toyota WHERE modelo = '{0}';"
+                   sql = "DELETE FROM inventario WHERE codigo = '{0}';"
                    cursor.execute(sql.format(modeloeliminar))
                    self.conexion.commit()
                    print("Datos eliminados exitosamente !!")

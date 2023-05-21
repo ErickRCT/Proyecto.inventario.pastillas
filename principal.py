@@ -49,15 +49,15 @@ def ejecutar_opcion(opcion):
          try:
               pastillas = dao.listarpastillas()
               if len(pastillas) > 0:
-                  existemodelo, pastilla = funciones.datosctualizacion(pastillas)
-                  if existemodelo:
+                  existecodigo, pastilla = funciones.datosctualizacion(pastillas)
+                  if existecodigo:
                        dao.actualizarpastilla(pastilla)
                   else:
-                       ("Pastilla no encontrada...\n")
+                       print("Pastilla no encontrada...\n")
               else:
                    print("No se encontro la pastilla...")      
          except:
-            print("Ocurrio un error")
+            print("Ocurrio un error...1")
 
     elif opcion == 4:
          try:
